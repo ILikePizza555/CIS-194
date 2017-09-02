@@ -18,3 +18,10 @@ every n xs = case drop (n-1) xs of
 skips :: [a] -> [[a]]
 skips xs = map (flip every xs) [1..(length xs)]
 
+-- Returns all the local maxima in a list of integers
+-- Works by recursively pattern-matching against triples
+localMaxima :: [Int] -> [Int]
+localMaxima (a:b:c:xs)
+    | b > a && b > c = b : localMaxima xs
+    | otherwise      = localMaxima (b:c:xs)
+localMaxima _ = []
